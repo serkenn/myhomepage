@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tech Profile</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #00ffff; /* サイバー感のあるシアン */
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      color: var(--text-main);
+      background-color: #0f172a; /* 読み込み前のフォールバック色 */
+      height: 100vh;
+      overflow: hidden; /* スクロール禁止 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Vanta.jsを描画するキャンバスのスタイル調整 */
+    canvas {
+      display: block;
+      vertical-align: bottom;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      padding: 2rem;
+      text-align: center;
+      z-index: 10; /* 背景より手前に表示 */
+      animation: fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ヘッダー */
+    header {
+      margin-bottom: 3rem;
+    }
+
+    .profile-icon {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-color);
+      /* 光る影（グロー効果） */
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); 
+      margin-bottom: 1.5rem;
+      transition: transform 0.5s ease;
+    }
+
+    .profile-icon:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    /* グリッドレイアウト */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      width: 100%;
+      perspective: 1000px; /* 3D効果の奥行き */
+    }
+
+    /* カードデザイン (Vanilla-Tilt用) */
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px); /* 強めのすりガラス */
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      
+      /* Tilt.jsの設定に必要なスタイル */
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      transform: translateZ(20px); /* 文字を少し浮かせる */
+    }
+
+    .card-icon {
+      width: 2rem;
+      height: 2rem;
+      fill: var(--text-main);
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      flex-grow: 1;
+      line-height: 1.6;
+      transform: translateZ(20px);
+    }
+
+    /* ネオン風ボタン */
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #0f172a;
+      background: var(--accent-color);
+      font-weight: 700;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      transform: translateZ(30px); /* ボタンを一番手前に */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      background: #fff;
+      box-shadow: 0 0 20px var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+      z-index: 10;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      h1 { font-size: 2rem; }
+      body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto; /* スマホのみスクロール許可 */
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body id="vanta-bg">
+
+  <div class="container">
+    <header>
+      <img class="profile-icon" src="https://via.placeholder.com/150/00ffff/0f172a?text=USER" alt="Profile">
+      <h1>Tech Profile</h1>
+      <p class="subtitle">Full Stack Developer / Creative Coder</p>
+    </header>
+
+    <main class="grid">
+      <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
+        <div class="card-header">
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <h2>GitHub</h2>
+        </div>
+        <p>最新のプロジェクトやソースコードはこちら。<br>Three.jsやReactの実験リポジトリも公開中。</p>
+        <a href="#" class="btn">View GitHub</a>
+      </div>
+
+      <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
+        <div class="card-header">
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <h2>X / Twitter</h2>
+        </div>
+        <p>技術的な知見や日常のアイデアをポスト。<br>DMでのコンタクトも歓迎です。</p>
+        <a href="#" class="btn">View Profile</a>
+      </div>
+    </main>
+
+    <footer>
+      &copy; 2024 Powered by WebGL & Vanilla-Tilt
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+  <script>
+    // 背景エフェクトの設定 (Vanta.js)
+    VANTA.NET({
+      el: "#vanta-bg",            // 適用する要素のID
+      mouseControls: true,        // マウスに反応するか
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x00ffff,            // 線の色 (シアン)
+      backgroundColor: 0x0f172a,  // 背景色 (濃いネイビー)
+      points: 12.00,              // 点の数
+      maxDistance: 22.00,         // 線がつながる距離
+      spacing: 18.00              // 空間の広がり
+    })
+
+    // カードの傾き設定 (Vanilla Tilt)
+    // HTMLの data-tilt 属性で自動的に適用されますが、
+    // 詳細設定をJSでしたい場合は以下のように書けます。
+    VanillaTilt.init(document.querySelectorAll(".card"), {
+      max: 15,            // 最大の傾き角度
+      speed: 400,         // アニメーション速度
+      glare: true,        // 光沢効果
+      "max-glare": 0.3    // 光沢の強さ
+    });
+  </script>
+
+</body>
+</html>
