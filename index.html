@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Tech Profile</title>
-  
+  <title>Kentaro Yamamoto - Profile</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --accent-color: #00ffff; /* サイバー感のあるシアン */
+      --accent-color: #00ffff;
       --glass-bg: rgba(255, 255, 255, 0.03);
       --glass-border: rgba(255, 255, 255, 0.1);
     }
@@ -27,17 +27,17 @@
     body {
       font-family: 'M PLUS Rounded 1c', sans-serif;
       color: var(--text-main);
-      background-color: #0f172a; /* 読み込み前のフォールバック色 */
-      height: 100vh;
-      overflow: hidden; /* スクロール禁止 */
+      background-color: #0f172a;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       position: relative;
+      overflow-y: auto;
+      padding: 2rem 0;
     }
 
-    /* Vanta.jsを描画するキャンバスのスタイル調整 */
     canvas {
       display: block;
       vertical-align: bottom;
@@ -48,7 +48,7 @@
       max-width: 900px;
       padding: 2rem;
       text-align: center;
-      z-index: 10; /* 背景より手前に表示 */
+      z-index: 10;
       animation: fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -57,9 +57,35 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* 言語切替ボタン */
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+
+    .lang-toggle:hover {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
     /* ヘッダー */
     header {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .profile-icon {
@@ -68,10 +94,10 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--accent-color);
-      /* 光る影（グロー効果） */
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); 
-      margin-bottom: 1.5rem;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      margin-bottom: 1rem;
       transition: transform 0.5s ease;
+      background: #1e293b;
     }
 
     .profile-icon:hover {
@@ -79,15 +105,23 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
+    .aka {
+      color: var(--accent-color);
+      font-size: 1rem;
+      margin-top: 0.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
     .subtitle {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
       margin-top: 0.5rem;
       font-weight: 400;
       letter-spacing: 0.05em;
@@ -99,13 +133,13 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
       width: 100%;
-      perspective: 1000px; /* 3D効果の奥行き */
+      perspective: 1000px;
     }
 
-    /* カードデザイン (Vanilla-Tilt用) */
+    /* カードデザイン */
     .card {
       background: var(--glass-bg);
-      backdrop-filter: blur(12px); /* 強めのすりガラス */
+      backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
@@ -113,8 +147,6 @@
       text-align: left;
       display: flex;
       flex-direction: column;
-      
-      /* Tilt.jsの設定に必要なスタイル */
       transform-style: preserve-3d;
       transform: perspective(1000px);
     }
@@ -124,7 +156,7 @@
       align-items: center;
       gap: 1rem;
       margin-bottom: 1rem;
-      transform: translateZ(20px); /* 文字を少し浮かせる */
+      transform: translateZ(20px);
     }
 
     .card-icon {
@@ -132,47 +164,180 @@
       height: 2rem;
       fill: var(--text-main);
       filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+      flex-shrink: 0;
     }
 
     .card h2 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--text-main);
     }
 
-    .card p {
-      font-size: 0.95rem;
+    .card p, .card .bio {
+      font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
-      flex-grow: 1;
-      line-height: 1.6;
+      line-height: 1.7;
       transform: translateZ(20px);
     }
 
-    /* ネオン風ボタン */
-    .btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      color: #0f172a;
-      background: var(--accent-color);
-      font-weight: 700;
-      padding: 1rem;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      transform: translateZ(30px); /* ボタンを一番手前に */
-      position: relative;
-      overflow: hidden;
+    .card .bio {
+      margin-bottom: 0;
+      flex-grow: 1;
     }
 
-    .btn:hover {
-      background: #fff;
-      box-shadow: 0 0 20px var(--accent-color);
+    /* プロフィール情報 */
+    .profile-info {
+      transform: translateZ(20px);
+    }
+
+    .profile-info dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.4rem 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .profile-info dt {
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .profile-info dd {
+      color: var(--text-muted);
+    }
+
+    .profile-info dd a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .profile-info dd a:hover {
       color: var(--accent-color);
     }
 
+    .bio-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    /* リンクリスト */
+    .link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transform: translateZ(20px);
+      flex-grow: 1;
+    }
+
+    .link-list li a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .link-list li a:hover {
+      color: var(--accent-color);
+      background: rgba(0, 255, 255, 0.05);
+      border-color: rgba(0, 255, 255, 0.2);
+    }
+
+    .link-list li a svg {
+      width: 1.3rem;
+      height: 1.3rem;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* 相互リンク ドロップダウン */
+    .mutual-links {
+      margin-top: 2rem;
+      z-index: 10;
+    }
+
+    .mutual-links-toggle {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 0.7rem 1.5rem;
+      border-radius: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mutual-links-toggle:hover {
+      color: var(--accent-color);
+      border-color: rgba(0, 255, 255, 0.3);
+    }
+
+    .mutual-links-toggle .arrow {
+      transition: transform 0.3s ease;
+      font-size: 0.7rem;
+    }
+
+    .mutual-links-toggle.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .mutual-links-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 0 1rem;
+    }
+
+    .mutual-links-list.open {
+      max-height: 200px;
+      padding: 1rem;
+    }
+
+    .mutual-links-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mutual-links-list a:hover {
+      color: var(--accent-color);
+      border-color: rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
     footer {
-      margin-top: 3rem;
+      margin-top: 2rem;
       font-size: 0.8rem;
       color: var(--text-muted);
       opacity: 0.5;
@@ -185,48 +350,102 @@
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      h1 { font-size: 2rem; }
-      body {
-        height: auto;
-        min-height: 100vh;
-        overflow-y: auto; /* スマホのみスクロール許可 */
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+      h1 { font-size: 1.8rem; }
+      .container { padding: 1rem; }
+      .profile-info dl {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+      .profile-info dt {
+        margin-top: 0.5rem;
       }
     }
   </style>
 </head>
 <body id="vanta-bg">
 
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+
   <div class="container">
     <header>
-      <img class="profile-icon" src="https://via.placeholder.com/150/00ffff/0f172a?text=USER" alt="Profile">
-      <h1>Tech Profile</h1>
-      <p class="subtitle">Full Stack Developer / Creative Coder</p>
+      <img class="profile-icon" src="" alt="Profile Icon">
+      <h1>Kentaro Yamamoto</h1>
+      <p class="aka">A.K.A serken</p>
+      <p class="subtitle">Navigator & Geek Engineer</p>
     </header>
 
     <main class="grid">
+      <!-- プロフィールカード -->
       <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
         <div class="card-header">
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          <h2>GitHub</h2>
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <h2 data-i18n="profile">Profile</h2>
         </div>
-        <p>最新のプロジェクトやソースコードはこちら。<br>Three.jsやReactの実験リポジトリも公開中。</p>
-        <a href="#" class="btn">View GitHub</a>
+        <div class="profile-info">
+          <dl>
+            <dt data-i18n="org">Organization</dt>
+            <dd>茄子胡瓜</dd>
+            <dt data-i18n="from">From</dt>
+            <dd>Nagasaki, Japan</dd>
+            <dt data-i18n="contact">Contact</dt>
+            <dd><a href="mailto:kentaro-y@serken.tech">kentaro-y@serken.tech</a></dd>
+          </dl>
+          <div class="bio-text" data-i18n="bio">そこらへんで高校生しながらいろいろしてます。
+しょうらいのゆめ：外航船の職員さん！(Officer)
+Navigator & Geek Engineer
+決済端末er & Docker & Proxmoxer
+Computer & morer</div>
+        </div>
       </div>
 
+      <!-- リンクカード -->
       <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
         <div class="card-header">
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          <h2>X / Twitter</h2>
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+          <h2 data-i18n="links">Links</h2>
         </div>
-        <p>技術的な知見や日常のアイデアをポスト。<br>DMでのコンタクトも歓迎です。</p>
-        <a href="#" class="btn">View Profile</a>
+        <ul class="link-list">
+          <li>
+            <a href="https://x.com/tsubokenn" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </a>
+          </li>
+          <li>
+            <a href="https://zenn.dev/tarokenchiku" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.264 23.771h4.984c.264 0 .498-.147.645-.352L19.614.874c.176-.293-.029-.645-.381-.645h-4.72c-.235 0-.44.117-.557.323L.03 23.361c-.088.176.029.41.234.41zM17.445 23.419l6.479-10.408c.205-.323-.029-.733-.41-.733h-4.691c-.176 0-.352.088-.44.235l-6.655 10.643c-.176.264.029.615.352.615h4.779c.234-.001.468-.118.586-.352z"/></svg>
+              Zenn
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/serkenn" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://speakerdeck.com/kentyam" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.025 0C5.538 0 1.893 3.645 1.893 8.132v7.736C1.893 20.355 5.538 24 10.025 24h3.95C18.462 24 22.107 20.355 22.107 15.868V8.132C22.107 3.645 18.462 0 13.975 0zm-.862 5.201h5.674a.69.69 0 01.69.69v1.226a.69.69 0 01-.69.69H9.163a.69.69 0 01-.69-.69V5.891a.69.69 0 01.69-.69zm0 4.136h5.674a.69.69 0 01.69.69v1.226a.69.69 0 01-.69.69H9.163a.69.69 0 01-.69-.69v-1.226a.69.69 0 01.69-.69zm0 4.136h5.674a.69.69 0 01.69.69v1.226a.69.69 0 01-.69.69H9.163a.69.69 0 01-.69-.69v-1.226a.69.69 0 01.69-.69z"/></svg>
+              Speaker Deck
+            </a>
+          </li>
+        </ul>
       </div>
     </main>
 
+    <!-- 相互リンク -->
+    <div class="mutual-links">
+      <button class="mutual-links-toggle" onclick="toggleMutualLinks(this)">
+        <span data-i18n="mutual">相互リンク</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="mutual-links-list" id="mutualLinksList">
+        <a href="https://sakana11.org/" target="_blank" rel="noopener">SakanaCloud Lab</a>
+      </div>
+    </div>
+
     <footer>
-      &copy; 2024 Powered by WebGL & Vanilla-Tilt
+      &copy; 2025 Kentaro Yamamoto — Powered by WebGL & Vanilla-Tilt
     </footer>
   </div>
 
@@ -235,31 +454,90 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <script>
-    // 背景エフェクトの設定 (Vanta.js)
+    // i18n 翻訳データ
+    var i18n = {
+      ja: {
+        profile: 'プロフィール',
+        org: 'Organization',
+        from: '出身地',
+        contact: 'Contact',
+        bio: 'そこらへんで高校生しながらいろいろしてます。\nしょうらいのゆめ：外航船の職員さん！(Officer)\nNavigator & Geek Engineer\n決済端末er & Docker & Proxmoxer\nComputer & morer',
+        links: 'リンク',
+        mutual: '相互リンク',
+        langBtn: 'EN'
+      },
+      en: {
+        profile: 'Profile',
+        org: 'Organization',
+        from: 'From',
+        contact: 'Contact',
+        bio: 'A high school student doing all kinds of things.\nFuture dream: Ocean-going vessel officer!\nNavigator & Geek Engineer\nPayment Terminal-er & Docker & Proxmoxer\nComputer & morer',
+        links: 'Links',
+        mutual: 'Mutual Links',
+        langBtn: 'JA'
+      }
+    };
+
+    var currentLang = 'ja';
+
+    // ブラウザの言語設定を検出して自動切替
+    function detectLang() {
+      var browserLang = (navigator.language || navigator.userLanguage || 'ja').toLowerCase();
+      if (!browserLang.startsWith('ja')) {
+        currentLang = 'en';
+      }
+      applyLang();
+    }
+
+    function applyLang() {
+      var t = i18n[currentLang];
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          el.textContent = t[key];
+        }
+      });
+      document.getElementById('langToggle').textContent = t.langBtn;
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      applyLang();
+    }
+
+    // 相互リンクのドロップダウン
+    function toggleMutualLinks(btn) {
+      btn.classList.toggle('open');
+      document.getElementById('mutualLinksList').classList.toggle('open');
+    }
+
+    // 初期化
+    detectLang();
+
+    // 背景エフェクト (Vanta.js)
     VANTA.NET({
-      el: "#vanta-bg",            // 適用する要素のID
-      mouseControls: true,        // マウスに反応するか
+      el: "#vanta-bg",
+      mouseControls: true,
       touchControls: true,
       gyroControls: false,
       minHeight: 200.00,
       minWidth: 200.00,
       scale: 1.00,
       scaleMobile: 1.00,
-      color: 0x00ffff,            // 線の色 (シアン)
-      backgroundColor: 0x0f172a,  // 背景色 (濃いネイビー)
-      points: 12.00,              // 点の数
-      maxDistance: 22.00,         // 線がつながる距離
-      spacing: 18.00              // 空間の広がり
-    })
+      color: 0x00ffff,
+      backgroundColor: 0x0f172a,
+      points: 12.00,
+      maxDistance: 22.00,
+      spacing: 18.00
+    });
 
-    // カードの傾き設定 (Vanilla Tilt)
-    // HTMLの data-tilt 属性で自動的に適用されますが、
-    // 詳細設定をJSでしたい場合は以下のように書けます。
+    // カードの傾き (Vanilla Tilt)
     VanillaTilt.init(document.querySelectorAll(".card"), {
-      max: 15,            // 最大の傾き角度
-      speed: 400,         // アニメーション速度
-      glare: true,        // 光沢効果
-      "max-glare": 0.3    // 光沢の強さ
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.3
     });
   </script>
 
