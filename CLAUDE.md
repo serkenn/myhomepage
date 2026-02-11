@@ -30,3 +30,7 @@ Open `index.html` directly in a browser. No build step or server required.
 - Color scheme: cyan accent `#00ffff` on dark navy `#0f172a`
 - Cards use both HTML data attributes (`data-tilt`, `data-tilt-glare`, `data-tilt-max-glare`, `data-tilt-scale`) and JS initialization for Vanilla Tilt
 - Vanta.js is applied to the `body` element via `id="vanta-bg"`
+
+## Communication
+
+- **返信は日本語で行うこと** — ユーザーへの応答はすべて日本語で記述する
