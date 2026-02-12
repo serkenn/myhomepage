@@ -552,7 +552,7 @@
         org: 'Organization',
         from: '出身地',
         contact: 'Contact',
-        bio: 'そこらへんで高校生しながらいろいろしてます。\n\n将来の夢：外航船の航海士！\n\n好きなもの：\n決済端末 / Docker / Proxmox / Computer',
+        bio: 'そこらへんで高校生しながらいろいろしてます。<br>将来の夢：外航船の航海士！<br>好きなもの：<br>決済端末 / Docker / Proxmox / Computer',
         links: 'リンク',
         mutual: '相互リンク',
         works: '作ったもの',
@@ -569,7 +569,7 @@
         org: 'Organization',
         from: 'From',
         contact: 'Contact',
-        bio: 'A high school student doing all kinds of things.\n\nFuture dream: Ocean-going vessel navigator!\n\nInterests:\nPayment Terminals / Docker / Proxmox / Computer',
+        bio: 'A high school student doing all kinds of things.<br>Future dream: Ocean-going vessel navigator!<br>Interests:<br>Payment Terminals / Docker / Proxmox / Computer',
         links: 'Links',
         mutual: 'Mutual Links',
         works: 'Works',
@@ -600,7 +600,7 @@
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) {
-          el.textContent = t[key];
+          el.innerHTML = t[key].replace(/\n/g, '<br>');
         }
       });
       document.getElementById('langToggle').textContent = t.langBtn;
