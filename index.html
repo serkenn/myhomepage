@@ -345,6 +345,46 @@
       z-index: 10;
     }
 
+    /* 資格リスト */
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transform: translateZ(20px);
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .cert-date {
+      color: var(--accent-color);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      padding-top: 0.15rem;
+      min-width: 4.5rem;
+    }
+
+    .cert-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-issuer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .cert-name {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
     /* スマホ対応 */
     @media (max-width: 768px) {
       .grid {
@@ -431,7 +471,37 @@
               Speaker Deck
             </a>
           </li>
+          <li>
+            <a href="https://pypi.org/user/serken/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.585 11.692h4.328s2.432.039 2.432-2.35V5.391S16.714 3 11.936 3C7.362 3 7.647 4.983 7.647 4.983l.006 2.055h4.363v.617H5.92S3 7.283 3 11.984s2.555 4.542 2.555 4.542h1.524v-2.185s-.082-2.554 2.513-2.554zm-.282-5.603a.804.804 0 110-1.609.804.804 0 010 1.609zM14.415 12.308h-4.328s-2.432-.039-2.432 2.35v3.951S7.286 21 12.064 21c4.574 0 4.289-1.983 4.289-1.983l-.006-2.055h-4.363v-.617h6.097S21 16.717 21 12.016s-2.555-4.542-2.555-4.542h-1.524v2.185s.082 2.554-2.513 2.554zm.282 5.603a.804.804 0 110 1.609.804.804 0 010-1.609z"/></svg>
+              PyPI
+            </a>
+          </li>
         </ul>
+      </div>
+
+      <!-- 資格カード -->
+      <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
+        <div class="card-header">
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          <h2 data-i18n="certifications">資格</h2>
+        </div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-date">2024.02</div>
+            <div class="cert-detail">
+              <span class="cert-issuer" data-i18n="cert1_issuer">全国水産学校長協会</span>
+              <span class="cert-name" data-i18n="cert1_name">水産海洋基礎検定</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-date">2025.03</div>
+            <div class="cert-detail">
+              <span class="cert-issuer" data-i18n="cert2_issuer">総務省</span>
+              <span class="cert-name" data-i18n="cert2_name">第二級海上特殊無線技士</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 作ったものカード -->
@@ -487,6 +557,11 @@
         mutual: '相互リンク',
         works: '作ったもの',
         navcalc: '航法計算プラットフォーム',
+        certifications: '資格',
+        cert1_issuer: '全国水産学校長協会',
+        cert1_name: '水産海洋基礎検定',
+        cert2_issuer: '総務省',
+        cert2_name: '第二級海上特殊無線技士',
         langBtn: 'EN'
       },
       en: {
@@ -499,6 +574,11 @@
         mutual: 'Mutual Links',
         works: 'Works',
         navcalc: 'Navigation Calculation Platform',
+        certifications: 'Certifications',
+        cert1_issuer: 'National Fisheries School Principals Association',
+        cert1_name: 'Fisheries & Marine Science Basic Certificate',
+        cert2_issuer: 'Ministry of Internal Affairs and Communications',
+        cert2_name: 'Second-Class Maritime Special Radio Operator',
         langBtn: 'JA'
       }
     };
