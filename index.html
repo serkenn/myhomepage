@@ -225,7 +225,13 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.8;
-      white-space: pre-line;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: normal;
+      hyphens: auto;
+      width: 100%;
+      max-width: 100%;
     }
 
     /* リンクリスト */
@@ -547,7 +553,12 @@
         org: 'Organization',
         from: '出身地',
         contact: 'Contact',
-        bio: 'そこらへんで高校生しながらいろいろしてます。\n将来の夢：外航船の航海士！\n好きなもの：\n決済端末 / Docker / Proxmox / Computer',
+        bio: `そこらへんで高校生しながらいろいろしてます。
+
+将来の夢：外航船の航海士！
+
+好きなもの：
+決済端末 / Docker / Proxmox / Computer`,
         links: 'リンク',
         mutual: '相互リンク',
         works: '作ったもの',
@@ -564,7 +575,12 @@
         org: 'Organization',
         from: 'From',
         contact: 'Contact',
-        bio: 'A high school student doing all kinds of things.\nFuture dream: Ocean-going vessel navigator!\nInterests:\nPayment Terminals / Docker / Proxmox / Computer',
+        bio: `A high school student doing various things.
+
+Future dream: Ocean-going vessel navigator!
+
+Interests:
+Payment Terminals / Docker / Proxmox / Computer`,
         links: 'Links',
         mutual: 'Mutual Links',
         works: 'Works',
