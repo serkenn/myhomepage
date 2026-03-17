@@ -558,7 +558,7 @@
 
     <!-- 相互リンク -->
     <div class="mutual-links">
-      <a class="mutual-links-toggle" href="links.html" data-i18n="mutual">相互リンク</a>
+      <a class="mutual-links-toggle" id="mutualLinksToggle" href="links.html" data-i18n="mutual">相互リンク</a>
     </div>
 
     <footer>
@@ -654,6 +654,7 @@ Payment Terminals / Docker / Proxmox / Computer`,
         }
       });
       document.getElementById('langToggle').textContent = t.langBtn;
+      document.getElementById('mutualLinksToggle').href = currentLang === 'ja' ? 'links.html' : 'links-en.html';
     }
 
     function toggleLang() {
