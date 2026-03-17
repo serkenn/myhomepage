@@ -4,7 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kentaro Yamamoto - Profile</title>
-  <link rel="icon" id="favicon" href="image.png">
+  <link rel="icon" id="favicon" href="assets/image.webp">
+
+  <!-- OGP / SNS埋め込みリンク用 -->
+  <meta property="og:title" content="Kentaro Yamamoto - Profile">
+  <meta property="og:description" content="Kentaro Yamamoto のポートフォリオサイト">
+  <meta property="og:image" content="https://serken.tech/assets/banner.webp">
+  <meta property="og:url" content="https://serken.tech/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kentaro Yamamoto - Profile">
+  <meta name="twitter:description" content="Kentaro Yamamoto のポートフォリオサイト">
+  <meta name="twitter:image" content="https://serken.tech/assets/banner.webp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -415,7 +426,7 @@
 
   <div class="container">
     <header>
-      <img class="profile-icon" src="image.png" alt="Kentaro Yamamoto">
+      <img class="profile-icon" src="assets/image.webp" alt="Kentaro Yamamoto">
       <h1>Kentaro Yamamoto</h1>
       <p class="aka">A.K.A serken</p>
       <p class="subtitle">Navigator & Geek Engineer</p>
@@ -677,7 +688,7 @@ Payment Terminals / Docker / Proxmox / Computer`,
         ctx.drawImage(img, 0, 0, size, size);
         document.getElementById('favicon').href = canvas.toDataURL('image/png');
       };
-      img.src = 'image.png';
+      img.src = 'assets/image.webp';
     })();
 
     // 初期化
