@@ -417,7 +417,6 @@
   <noscript>
     <div class="noscript-lang-links" style="display:flex">
       <a href="index.html">JA</a>
-      <a href="en.html">EN</a>
     </div>
   </noscript>
 
@@ -558,7 +557,7 @@ Payment Terminals / Docker / Proxmox / Computer</div>
 
     <!-- 相互リンク -->
     <div class="mutual-links">
-      <a class="mutual-links-toggle" href="links-en.html" data-i18n="mutual">Mutual Links</a>
+      <a class="mutual-links-toggle" id="mutualLinksToggle" href="links-en.html" data-i18n="mutual">Mutual Links</a>
     </div>
 
     <footer>
@@ -654,6 +653,7 @@ Payment Terminals / Docker / Proxmox / Computer`,
         }
       });
       document.getElementById('langToggle').textContent = t.langBtn;
+      document.getElementById('mutualLinksToggle').href = currentLang === 'ja' ? 'links.html' : 'links-en.html';
     }
 
     function toggleLang() {
