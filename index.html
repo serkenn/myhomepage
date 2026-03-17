@@ -303,55 +303,12 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      text-decoration: none;
     }
 
     .mutual-links-toggle:hover {
       color: var(--accent-color);
       border-color: rgba(0, 255, 255, 0.3);
-    }
-
-    .mutual-links-toggle .arrow {
-      transition: transform 0.3s ease;
-      font-size: 0.7rem;
-    }
-
-    .mutual-links-toggle.open .arrow {
-      transform: rotate(180deg);
-    }
-
-    .mutual-links-list {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.8rem;
-      padding: 0 1rem;
-    }
-
-    .mutual-links-list.open {
-      max-height: 200px;
-      padding: 1rem;
-    }
-
-    .mutual-links-list a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 0.4rem 1rem;
-      border-radius: 10px;
-      border: 1px solid var(--glass-border);
-      transition: all 0.3s ease;
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .mutual-links-list a:hover {
-      color: var(--accent-color);
-      border-color: rgba(0, 255, 255, 0.3);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
 
     footer {
@@ -556,14 +513,7 @@
 
     <!-- 相互リンク -->
     <div class="mutual-links">
-      <button class="mutual-links-toggle" onclick="toggleMutualLinks(this)">
-        <span data-i18n="mutual">相互リンク</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="mutual-links-list" id="mutualLinksList">
-        <a href="https://techfish.dev/" target="_blank" rel="noopener">techfish</a>
-        <a href="https://evex.land/" target="_blank" rel="noopener">Evex Developers</a>
-      </div>
+      <a class="mutual-links-toggle" href="links.html" data-i18n="mutual">相互リンク</a>
     </div>
 
     <footer>
@@ -664,12 +614,6 @@ Payment Terminals / Docker / Proxmox / Computer`,
     function toggleLang() {
       currentLang = currentLang === 'ja' ? 'en' : 'ja';
       applyLang();
-    }
-
-    // 相互リンクのドロップダウン
-    function toggleMutualLinks(btn) {
-      btn.classList.toggle('open');
-      document.getElementById('mutualLinksList').classList.toggle('open');
     }
 
     // 丸型ファビコン生成
