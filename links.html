@@ -148,6 +148,16 @@
         user-select: all;
       }
 
+      /* 広告枠 */
+      .ad-slot {
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+      }
+
       .back-link {
         display: inline-block;
         margin-top: 2rem;
@@ -264,6 +274,11 @@
         <p data-i18n="myBanner">当サイトのバナー</p>
         <img src="assets/banner.webp" alt="serken.tech banner" />
         <code>https://serken.tech/assets/banner.webp</code>
+      </div>
+
+      <!-- 広告 (Adring) -->
+      <div class="ad-slot">
+        <script async src="https://adring.net/widget/v1.js" data-site-id="5c2c82e8-eea7-4672-8211-6814eb4fd751" data-variant="compact"></script>
       </div>
 
       <a class="back-link" href="index.html" data-i18n="back"
