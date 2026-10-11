@@ -1,0 +1,9 @@
+# Dependabot 設定
+# このサイトはパッケージマネージャーを使わず CDN から読み込んでいるため、
+# 現時点で監視対象になるのは GitHub Actions のみ。
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
