@@ -403,6 +403,23 @@
       font-weight: 700;
     }
 
+    .cert-expiry {
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      opacity: 0.8;
+    }
+
+    /* 実績リスト */
+    .achievement-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .achievement-desc {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
     /* スマホ対応 */
     @media (max-width: 768px) {
       .grid {
@@ -525,13 +542,6 @@ Payment Terminals / Docker / Proxmox / Computer</div>
             </div>
           </div>
           <div class="cert-item">
-            <div class="cert-date">2026.02</div>
-            <div class="cert-detail">
-              <span class="cert-issuer" data-i18n="cert3_issuer">Ministry of Land, Infrastructure, Transport and Tourism</span>
-              <span class="cert-name" data-i18n="cert3_name">Class 3 Maritime Officer (Navigation) - Navigation Subject Passed</span>
-            </div>
-          </div>
-          <div class="cert-item">
             <div class="cert-date">2026.03</div>
             <div class="cert-detail">
               <span class="cert-issuer" data-i18n="cert4_issuer">Ministry of Land, Infrastructure, Transport and Tourism</span>
@@ -543,6 +553,21 @@ Payment Terminals / Docker / Proxmox / Computer</div>
             <div class="cert-detail">
               <span class="cert-issuer" data-i18n="cert5_issuer">Ministry of Land, Infrastructure, Transport and Tourism</span>
               <span class="cert-name" data-i18n="cert5_name">Class 1 Small Vessel Operator License</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-date">2026.07</div>
+            <div class="cert-detail">
+              <span class="cert-issuer" data-i18n="cert3_issuer">Ministry of Land, Infrastructure, Transport and Tourism</span>
+              <span class="cert-name" data-i18n="cert3_name">Class 3 Maritime Officer (Navigation) - Written Exam Passed</span>
+              <span class="cert-expiry" data-i18n="cert3_expiry">Valid until 2041.07 (15 years)</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-date">2026.08</div>
+            <div class="cert-detail">
+              <span class="cert-issuer" data-i18n="cert6_issuer">Public Safety Commission</span>
+              <span class="cert-name" data-i18n="cert6_name">Moped License</span>
             </div>
           </div>
         </div>
@@ -559,6 +584,25 @@ Payment Terminals / Docker / Proxmox / Computer</div>
             <a href="https://navcalc.serken.tech/" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
               <span data-i18n="navcalc">Navigation Calculation Platform</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 実績カード -->
+      <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5" data-tilt-scale="1.05">
+        <div class="card-header">
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+          <h2 data-i18n="achievements">Achievements</h2>
+        </div>
+        <ul class="link-list">
+          <li>
+            <a href="https://ethglobal.com/showcase/sui-cash-c0ikf" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+              <span class="achievement-text">
+                <span data-i18n="ach1_title">ETHGlobal Tokyo 2026 — Sui Cash</span>
+                <span class="achievement-desc" data-i18n="ach1_desc">Pay from a Sui wallet by tapping a FeliCa transit IC card with face authentication, with ZK proofs verifying card authenticity</span>
+              </span>
             </a>
           </li>
         </ul>
@@ -610,11 +654,17 @@ Payment Terminals / Docker / Proxmox / Computer</div>
         cert2_issuer: '総務省',
         cert2_name: '第二級海上特殊無線技士',
         cert3_issuer: '国土交通省',
-        cert3_name: '三級海技士（航海）航海科目 科目合格',
+        cert3_name: '三級海技士（航海）筆記合格',
         cert4_issuer: '国土交通省',
         cert4_name: '四級海技士（航海）筆記免除',
         cert5_issuer: '国土交通省',
         cert5_name: '一級小型船舶操縦士免許',
+        cert3_expiry: '有効期限：2041.07（15年間有効）',
+        cert6_issuer: '公安委員会',
+        cert6_name: '原動機付自転車免許',
+        achievements: '実績',
+        ach1_title: 'ETHGlobal Tokyo 2026 — Sui Cash',
+        ach1_desc: '交通系ICカード(FeliCa)をタッチ＋顔認証でSuiウォレット決済。ZK証明でカードの真正性を検証',
         langBtn: 'EN'
       },
       en: {
@@ -638,11 +688,17 @@ Payment Terminals / Docker / Proxmox / Computer`,
         cert2_issuer: 'Ministry of Internal Affairs and Communications',
         cert2_name: 'Second-Class Maritime Special Radio Operator',
         cert3_issuer: 'Ministry of Land, Infrastructure, Transport and Tourism',
-        cert3_name: 'Class 3 Maritime Officer (Navigation) - Navigation Subject Passed',
+        cert3_name: 'Class 3 Maritime Officer (Navigation) - Written Exam Passed',
         cert4_issuer: 'Ministry of Land, Infrastructure, Transport and Tourism',
         cert4_name: 'Class 4 Maritime Officer (Navigation) - Written Exam Exempted',
         cert5_issuer: 'Ministry of Land, Infrastructure, Transport and Tourism',
         cert5_name: 'Class 1 Small Vessel Operator License',
+        cert3_expiry: 'Valid until 2041.07 (15 years)',
+        cert6_issuer: 'Public Safety Commission',
+        cert6_name: 'Moped License',
+        achievements: 'Achievements',
+        ach1_title: 'ETHGlobal Tokyo 2026 — Sui Cash',
+        ach1_desc: 'Pay from a Sui wallet by tapping a FeliCa transit IC card with face authentication, with ZK proofs verifying card authenticity',
         langBtn: 'JA'
       }
     };
